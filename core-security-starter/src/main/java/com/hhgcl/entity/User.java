@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class User extends BaseEntity {
 
-    @Column(name = "session_id")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "first_name")

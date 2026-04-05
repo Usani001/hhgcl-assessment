@@ -34,8 +34,9 @@ public class CustomUserDetails implements UserDetails {
         this.lastName = user.getLastName();
         this.password = user.getPassword();
         this.verified = user.isVerified();
-        this.authorities = Stream.of(new SimpleGrantedAuthority("user"))
-                .collect(Collectors.toList());
+        this.authorities = List.of(
+                new SimpleGrantedAuthority(user.getRole())
+        );
 
     }
 

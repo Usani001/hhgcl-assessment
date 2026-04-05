@@ -18,8 +18,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     @NonNull
-    public UserDetails loadUserByUsername(@NonNull String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
+    public UserDetails loadUserByUsername(@NonNull String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username)
                 .map(CustomUserDetails::new)
                 .orElseThrow(()-> new UsernameNotFoundException("User not in Database"));
     }

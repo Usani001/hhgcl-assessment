@@ -1,7 +1,9 @@
 package com.hhgcl.config;
 
 import com.hhgcl.security.JwtAuthFilter;
+import com.hhgcl.utils.SecurityProperties;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
+@EnableConfigurationProperties(SecurityProperties.class)
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
 
@@ -41,7 +44,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // <-- fixed
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/public/health"
+                                "/api/public/health",
+                                "/auth/register","/auth/login"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
